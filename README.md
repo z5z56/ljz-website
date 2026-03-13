@@ -52,3 +52,4 @@ ljz-website/
 For custom domain (ljz.ml):
 1. Go to your domain registrar's DNS settings
 2. Add CNAME record pointing to your GitHub Pages URL
+# trigger build

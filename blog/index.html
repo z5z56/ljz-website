@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术博客 | Junzhe Lin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-page="blog">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="index.html" class="active">技术博客</a></li>
+                    <li><a href="../about.html">关于我</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>中文</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <button class="lang-option active" data-lang="zh">中文</button>
+                            <button class="lang-option" data-lang="en">English</button>
+                            <button class="lang-option" data-lang="ja">日本語</button>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="切换主题">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="blog-categories">
+            <h1 class="page-title">技术博客</h1>
+            <p class="page-desc">分享云原生、嵌入式与分布式系统的学习心得</p>
+
+            <!-- 云计算分类 -->
+            <div class="category-section">
+                <h2 class="category-title">
+                    <span class="category-icon">☁️</span>
+                    云计算
+                </h2>
+                <div class="post-list">
+                    <article class="post-item">
+                        <span class="post-date">2026-03-10</span>
+                        <h3><a href="aws-ec2-beginner.html">AWS EC2 入门指南：如何在云端启动你的第一台服务器</a></h3>
+                        <p>本篇文章将带你深入了解 Amazon EC2 的核心概念，学习如何配置安全组、选择实例类型，并完成你的第一台云服务器部署。</p>
+                    </article>
+                    <article class="post-item">
+                        <span class="post-date">2026-03-08</span>
+                        <h3><a href="aws-s3-beginner.html">AWS S3 入门指南：云存储完全掌握</a></h3>
+                        <p>深入学习 AWS S3 的存储桶配置、权限管理、版本控制和安全最佳实践，轻松构建可靠的对象存储解决方案。</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 嵌入式软件分类 -->
+            <div class="category-section">
+                <h2 class="category-title">
+                    <span class="category-icon">🔧</span>
+                    嵌入式软件
+                </h2>
+                <div class="post-list">
+                    <article class="post-item">
+                        <span class="post-date">2021-03</span>
+                        <h3><a href="pn532-nfc-tutorial.html">使用 PN532 将全加密卡复制到手环上 — NFC 校园门禁卡模拟教程</a></h3>
+                        <p>详细记录如何使用 PN532 模块和 UID 卡，将全加密校园门禁卡模拟到智能手环上，包含材料准备、破解步骤、模拟教程等完整指南。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

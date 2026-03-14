@@ -240,6 +240,20 @@ function updatePageContent(lang) {
             if (labels[1]) labels[1].textContent = t.about.github + ':';
         }
     }
+    
+    // Handle blog index page
+    if (page === 'blog' && typeof updateBlogIndex === 'function') {
+        updateBlogIndex(lang);
+    }
+    
+    // Handle individual blog posts
+    if (page === 'blog-post') {
+        // Get blog slug from URL or body data attribute
+        const blogSlug = document.body.dataset.blogSlug;
+        if (blogSlug && typeof updateBlogContent === 'function') {
+            updateBlogContent(blogSlug, lang);
+        }
+    }
 }
 
 function setTheme(theme) {

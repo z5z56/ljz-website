@@ -8,6 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
 </head>
 <body data-page="blog">
     <nav class="navbar">
@@ -59,10 +75,16 @@
             <p>模拟加密卡想法由来已久，但由于网络上方法步骤参差不齐，看了很多很多资料最近才终于弄清楚了，现进行一个整理，并试图写一个教程。</p>
 
             <h2>材料准备</h2>
+            <img src="images/pn532/pn532-materials.jpg" alt="PN532材料">
+            <p class="image-caption">PN532 模块及所需材料</p>
+
             <p><strong>硬件：</strong>PN532、USB转串口、4根杜邦线、<strong>UID卡</strong>（注意本教程不适用于 CUID/UFUID 卡！）、你要模拟的手环（我的是华为荣耀手环5）+连接手环的手机/含有NFC的手机</p>
             <p><strong>软件：</strong>蛐蛐、MifareOneTool、驱动</p>
 
             <h2>模拟原理</h2>
+            <img src="images/pn532/nfc-principle.png" alt="NFC原理">
+            <p class="image-caption">NFC 技术原理</p>
+
             <ul>
                 <li>手环不能直接模拟加密卡，因为加密卡除了扇区0（存UID的扇区）还含有其他信息</li>
                 <li>为了让手环可以模拟，我们需要制作一张只有扇区0（UID同原加密卡相同）含有信息的空白UID卡</li>

@@ -68,7 +68,7 @@
         <div class="post-content">
             <p>我决定把资源倒腾倒腾发上来，一方面分享大致思路，另一方面也当是纪念了。做的是 2020 电赛 F 题：<strong>简易无接触温度测量与身份识别装置</strong></p>
 
-            <img src="images/contest-topic.png" alt="2020电赛F题题目">
+            <img src="images/openmv/contest-topic.png" alt="2020电赛F题题目">
             <p class="image-caption">2020 电赛 F 题题目</p>
 
             <h2>整体设计</h2>
@@ -76,7 +76,7 @@
             <h3>硬件选择</h3>
             <p>机器视觉模块使用 OpenMV，这一方面是我们在备赛过程中认为 OpenMV 的功能足够，一直在准备 OpenMV，另一方面是当时马上下单 K210 开始学习等到货都已经第三天了，调试来不及风险太大了，所以决定使用 OpenMV。</p>
             
-            <img src="images/openmv-h7plus.png" alt="OpenMV H7 Plus">
+            <img src="images/openmv/openmv-h7plus.png" alt="OpenMV H7 Plus">
             <p class="image-caption">OpenMV H7 Plus</p>
             
             <p>好在我们买的是最顶配型号 OpenMV H7 Plus，最终也顺利完成了题目要求的所有任务。</p>
@@ -89,13 +89,13 @@
 
             <p>最后的电路板设计，器件布局如下：</p>
             
-            <img src="images/pcb-layout.png" alt="PCB布局">
+            <img src="images/openmv/pcb-layout.png" alt="PCB布局">
             <p class="image-caption">PCB 布局</p>
 
             <h3>软件流程</h3>
             <p>STM32 和 OpenMV 通过串口通信，我们指定一个字母对应进入一个模式，通电后 OpenMV 就在死循环不断等待字母，收到字母即执行对应模式功能，再返回结果。具体可看软件流程图：</p>
             
-            <img src="images/software-flow.png" alt="软件流程图">
+            <img src="images/openmv/software-flow.png" alt="软件流程图">
             <p class="image-caption">软件流程图</p>
 
             <h2>视觉算法</h2>

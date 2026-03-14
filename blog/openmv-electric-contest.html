@@ -115,6 +115,129 @@
 
             <p><strong>我的方法是：</strong>先加一层人脸识别，将人脸部分局部放大截取出来再拿去提取特征点并进行特征点比对，通过这种方法，就不用对被识别者有很大的要求，实现类似 K210 一样的功能啦~</p>
 
+            <p>关于上面这个思路，直接上代码：</p>
+
+            <pre><code class="language-python">#画出特征点
+def draw_keypoints(img, kpts):
+    if kpts:
+        print(kpts)
+        img.draw_keypoints(kpts)
+        img = sensor.snapshot()
+        time.sleep(1000)
+
+
+def find_max(pmax, a, s):
+    global face_num
+    if a>pmax:
+        pmax=a
+        face_num=s
+    return pmax
+
+def Distinguish_faces():
+    global NUM_SUBJECTS
+    global NUM_SUBJECTS_IMGS
+
+    pyb.LED(3).on()
+    # 重置传感器
+    sensor.reset()
+    sensor.set_contrast(3)
+    sensor.set_gainceiling(16)
+    sensor.set_framesize(sensor.VGA)
+    sensor.set_windowing((240, 240))
+    sensor.set_pixformat(sensor.GRAYSCALE)
+
+    sensor.set_auto_gain(True, gain_db_ceiling = 20.0)
+    sensor.skip_frames(time = 500)
+
+    pmax=0#保存检测点和样本点的匹配程度，越大越接近，初始化为最小
+
+    loop_flag=1#循环检测标志位，检测到人脸身边识别后退出
+    type_flag=0#kpts1类别正确标志位，正确为1，错误为0
+    while(loop_flag):
+
+        #加了histeq子自适应直方图均衡，当人脸填满整个屏幕的时候可以提高一点点识别准确度.histeq(adaptive=True, clip_limit=3)
+        #找图片中人脸
+        #gamma_corr用于修正图像中色彩，数值越高图像越亮
+        faces = sensor.snapshot().gamma_corr(contrast=1.5).find_features(image.HaarCascade("frontalface"))
+        lcd.display(sensor.snapshot())
+
+        if faces:
+            #获取image中人像部分largest_face的roi
+            largest_face = max(faces, key = lambda f: f[3] * f[3])
+            img=sensor.get_fb().crop(roi=largest_face)#裁剪人脸部分保存到img
+
+            kpts1=img.find_keypoints(max_keypoints=90, threshold=0, scale_factor=1.3)
+
+            if(type(kpts1).__name__=='kp_desc'):#kpts1的类型是kp_desc，也就是确保find_keypoints找到了特征点
+                type_flag=1
+            else:
+                print("kpts1 type wrong")
+                type_flag=0
+        else:
+            print("find no face")
+
+       #仅当图片中有人脸（正脸）且裁切脸部分找到了特征点，才进行特征点比对判断
+        if type_flag:
+            loop_flag=0
+
+            lcd.display(img)
+            draw_keypoints(img, kpts1)
+            num=0
+            #下面进行特征点比对
+            kpts2=None
+            #存储每个人的特征值
+            feature_values=[0]
+            for s in range(1, NUM_SUBJECTS+1):
+                match_count = int(0)
+                angle_count=0
+
+                for i in range(2, NUM_SUBJECTS_IMGS+1):
+                    kpts2=image.load_descriptor("/keypoints/s%s/%s.orb"%(s,i))
+                    match_count+=image.match_descriptor(kpts1, kpts2).count()
+
+                print("Average match_count for subject %d: %d"%(s, match_count))
+                pmax = find_max(pmax, match_count, s)
+                feature_values.append(match_count)#存储每个人的特征值
+
+            #计算平均值
+            feature_sum=0
+            for feature_value in feature_values:
+                print("feature_value is %d" % feature_value)
+                n=len(feature_values)-1
+                feature_sum+=feature_value
+            average=feature_sum/n
+            print("average is %d" % average)
+
+            #计算方差
+            pow_sum=0
+            for feature_value in feature_values:
+                if feature_value==0:
+                    feature_value=average
+                print("此项方差为%d" % math.pow(feature_value-average,2))
+                pow_sum+=math.pow(feature_value-average,2)
+
+            variance=pow_sum/n
+            print("variance is %d" % variance)
+
+            #根据方差判断，如果三个人的结果差别很大则方差很大，相对来说结果可信
+            if variance<1500:
+                uart.write(str(0))
+                print("unknown person !")
+            else:
+                uart.write(str(face_num))
+                print("The most similar person is:%d"%face_num)
+
+    lcd.clear()
+    pyb.LED(3).off()</code></pre>
+
+            <p>当然代码中还有许多其他的小细节，比如最后加了一个方差计算，这是为了使得识别陌生人脸更准确，即如果拍摄特征点与内存中存储的三个人的特征点比对结果都差不多，也就是方差小，那就很有可能并不是三个人中的一个人，而是陌生人，这个方差阈值是经过实践得出的，根据光线可能需要不同调整。</p>
+
+            <p>总结一下（速成版本，系统学习理论请参考其他大佬）：</p>
+            <ul>
+                <li><strong>LBP 局部二值模式</strong>：采集一定数量的模板 pgm 图片数据。在进行人脸识别时，将读取到的图片与模板数据库进行相似度比较，从中选取最高相似度的模板，从而确定被测人信息。</li>
+                <li><strong>特征点 AGAST 算法</strong>：多尺度快速角点特征提取算法。提前保存目标特征 orb 文件，在进行人脸识别时，提取目标的特征点与特征点库进行匹配得出结果，经过方差计算判断可信度后得出结果。</li>
+            </ul>
+
             <h3>口罩识别</h3>
             <p>两种模型引申出的两种不同方法：</p>
             <ul>
@@ -125,12 +248,84 @@
             <h3>现场学习</h3>
             <p>由于使用特征点，现场学习不过就是把拍摄，提取特征点，文件保存放到现场进行罢了，在我这套逻辑下现场学习并没有多出多少难度，我们现场拍摄 20 张够够的了。</p>
 
+            <pre><code class="language-python">#特征学习
+def machine_learning():
+    sensor.reset()
+    sensor.set_contrast(3)
+    sensor.set_gainceiling(16)
+    sensor.set_framesize(sensor.VGA)
+    sensor.set_windowing((240, 240))
+    sensor.set_pixformat(sensor.GRAYSCALE)
+
+    sensor.set_auto_gain(True, gain_db_ceiling = 20.0)
+    sensor.skip_frames(time = 2000)
+
+    global NUM_SUBJECTS_IMGS
+    global NUM_SUBJECTS
+    print("last NUM_SUBJECTS =%d" % NUM_SUBJECTS)
+    NUM_SUBJECTS=NUM_SUBJECTS+1
+    print("now NUM_SUBJECTS =%d" % NUM_SUBJECTS)
+
+    p_num=NUM_SUBJECTS_IMGS
+    s=NUM_SUBJECTS
+    kpts1 = None
+
+    while(p_num):
+        #红灯亮
+        pyb.LED(1).on()
+        faces = sensor.snapshot().gamma_corr(contrast=1.5).find_features(image.HaarCascade("frontalface"))
+        lcd.display(sensor.snapshot())
+        lcd.clear()
+        if faces:
+            largest_face = max(faces, key = lambda f: f[3] * f[3])#获取image中人像部分roi
+            img=sensor.get_fb().crop(roi=largest_face)#裁剪
+
+            lcd.display(img)
+            #寻找保存整个图片中的特征点
+            kpts1 = img.find_keypoints(max_keypoints=90, threshold=0, scale_factor=1.3)
+            if (kpts1 == None):
+                print("Couldn't find any keypoints!")
+            else:
+                #画出此时的目标特征
+                draw_keypoints(img, kpts1)
+
+                lcd.display(img)
+                #保存此时图片和对应特征点orb文件
+                #保存截取到的图片到SD卡，蓝灯亮的时候完成一次拍照
+                image.save_descriptor(kpts1, "keypoints/s%s/%s.orb"%(s,p_num))
+                img.save("keypoints/s%s/%s.pgm"%(s,p_num))
+                p_num-=1
+                print(p_num)
+                #存一次亮一下提示
+                #红灯灭，蓝灯亮
+                pyb.LED(1).off()
+                pyb.LED(3).on()
+                sensor.skip_frames(time = 50)
+                pyb.LED(3).off()
+                uart.write(str(9))
+        else:
+            print("find no face")
+
+    #学习完成闪两次绿灯
+    pyb.LED(2).on()
+    sensor.skip_frames(time = 100)
+    pyb.LED(2).off()
+    sensor.skip_frames(time = 100)
+    pyb.LED(2).on()
+    sensor.skip_frames(time = 100)
+    pyb.LED(2).off()
+    lcd.clear()
+    uart.write(str("f"))#发送f代表学习完成</code></pre>
+
             <h3>其他优化算法</h3>
+            <p>为了让 OpenMV 能获得好的结果真的很努力呢哈哈哈</p>
             <ul>
-                <li><strong>直方图均值化：</strong> <code>.histeq(adaptive=True, clip_limit=3)</code> 处理后的图像将具有较大的灰度动态范围和较高的对比度。</li>
-                <li><strong>局部放大后识别：</strong> <code>sensor.get_fb().crop(roi=largest_face)</code> 首先利用固件库自带人脸 Haar 模型进行识别人脸，识别后截取人脸部分再进行特征点比对。</li>
-                <li><strong>自动增益：</strong> <code>sensor.snapshot().gamma_corr(contrast=1.5)</code> 伽马校正用于修正图像中色彩和对比度。</li>
+                <li><strong>直方图均值化：</strong> <code>.histeq(adaptive=True, clip_limit=3)</code> 直方图均值化后，灰度直方图几乎覆盖了整个灰度的取值范围，并且除了个别灰度值的个数较为突出，整个灰度值分布近似于均匀分布，经过这样处理的图像将具有较大的灰度动态范围和较高的对比度，图像的细节更为丰富。</li>
+                <li><strong>局部放大后识别：</strong> <code>sensor.get_fb().crop(roi=largest_face)</code> 首先利用固件库自带人脸 Haar 模型进行识别人脸，识别后截取人脸部分再进行特征点比对，这将提高精确度并减少运算量。</li>
+                <li><strong>自动增益：</strong> <code>sensor.snapshot().gamma_corr(contrast=1.5)</code> 伽马校正用于修正图像中色彩和对比度，数值越高图像越亮</li>
             </ul>
+
+            <p>总的来说那两天是把 Micropython 函数库翻了一遍，能试的都一个个试过去了，这几个是对结果确实有帮助的函数</p>
 
             <h2>总结</h2>
             <p>我们最终获得了福建省二等奖，由于送测的时候 90614 模块出了问题，测温爆炸，反而其他部分包括视觉部分都是满分，遗憾没有省一，就当吸取要准备 Plan B 的教训了害。</p>
@@ -151,6 +346,7 @@
         <p>© 2026 Junzhe Lin. All rights reserved.</p>
     </footer>
 
+    <script src="../js/code-highlight.js"></script>
     <script src="../js/main.js"></script>
 </body>
 </html>

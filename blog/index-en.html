@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术博客 | Junzhe Lin</title>
+    <title>Tech Blog | Junzhe Lin</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,25 +128,25 @@
             <a href="../index.html" class="logo">Junzhe Lin</a>
             <div class="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="../index.html">首页</a></li>
-                    <li><a href="index.html" class="active">技术博客</a></li>
-                    <li><a href="../about.html">关于我</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Tech Blog</a></li>
+                    <li><a href="../about.html">About我</a></li>
                 </ul>
                 <div class="nav-controls">
                     <div class="lang-switch">
                         <button class="lang-btn">
-                            <span>中文</span>
+                            <span>English</span>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
                                 <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
                             </svg>
                         </button>
                         <div class="lang-dropdown">
-                            <a href="index.html" class="lang-option active">中文</a>
+                            <a href="index.html" class="lang-option active">English</a>
                             <a href="index-en.html" class="lang-option">English</a>
                             <a href="index-ja.html" class="lang-option">日本語</a>
                         </div>
                     </div>
-                    <button class="theme-toggle" title="切换主题">🌙</button>
+                    <button class="theme-toggle" title="Toggle Theme">🌙</button>
                 </div>
             </div>
         </div>
@@ -154,49 +154,49 @@
 
     <main class="container">
         <section class="blog-categories">
-            <h1 class="page-title">技术博客</h1>
-            <p class="page-desc">分享云原生、嵌入式与分布式系统的学习心得</p>
+            <h1 class="page-title">Tech Blog</h1>
+            <p class="page-desc">Sharing insights on Cloud Native, Embedded Systems & Distributed Systems</p>
 
-            <!-- 云计算分类 -->
+            <!-- Cloud Computing分类 -->
             <div class="category-section">
                 <h2 class="category-title category-cloud">
                     <span class="category-icon">☁️</span>
-                    云计算
+                    Cloud Computing
                 </h2>
                 <div class="post-list">
                     <article class="post-item category-cloud" data-post-slug="aws-ec2">
                         <span class="post-category-tag tag-cloud">AWS</span>
                         <span class="post-date">2026-03-10</span>
-                        <h3><a href="aws-ec2-beginner.html">AWS EC2 入门指南：如何在云端启动你的第一台服务器</a></h3>
-                        <p>本篇文章将带你深入了解 Amazon EC2 的核心概念，学习如何配置安全组、选择实例类型，并完成你的第一台云服务器部署。</p>
+                        <h3><a href="aws-ec2-beginner.html">AWS EC2 Getting Started：如何在云端启动你的第一台服务器</a></h3>
+                        <p>This article will take you through the core concepts of Amazon EC2, learn how to configure security groups, select instance types, and deploy your first cloud server.</p>
                     </article>
                     <article class="post-item category-cloud" data-post-slug="aws-s3">
                         <span class="post-category-tag tag-cloud">AWS</span>
                         <span class="post-date">2026-03-08</span>
-                        <h3><a href="aws-s3-beginner.html">AWS S3 入门指南：云存储完全掌握</a></h3>
-                        <p>深入学习 AWS S3 的存储桶配置、权限管理、版本控制和安全最佳实践，轻松构建可靠的对象存储解决方案。</p>
+                        <h3><a href="aws-s3-beginner.html">AWS S3 Getting Started：云存储完全掌握</a></h3>
+                        <p>Deep dive into AWS S3 bucket configuration, permissions management, versioning, and security best practices to build reliable object storage solutions.</p>
                     </article>
                 </div>
             </div>
 
-            <!-- 嵌入式软件分类 -->
+            <!-- Embedded Software分类 -->
             <div class="category-section">
                 <h2 class="category-title category-embedded">
                     <span class="category-icon">🔧</span>
-                    嵌入式软件
+                    Embedded Software
                 </h2>
                 <div class="post-list">
                     <article class="post-item category-embedded" data-post-slug="openmv-electric-contest">
                         <span class="post-category-tag tag-embedded">电赛</span>
                         <span class="post-date">2020-09</span>
-                        <h3><a href="openmv-electric-contest.html">2020 电赛 F 题总结回顾 — OpenMV 实现视觉方案</a></h3>
-                        <p>2020 年全国大学生电子设计竞赛 F 题《简易无接触温度测量与身份识别装置》方案总结，使用 OpenMV H7 Plus 实现人脸识别、口罩检测等功能。</p>
+                        <h3><a href="openmv-electric-contest.html">2020 Electronic Design Contest Summary — OpenMV 实现视觉方案</a></h3>
+                        <p>Summary of the 2020 Electronic Design Contest Topic F - Contactless Temperature Measurement and Identity Recognition, using OpenMV H7 Plus for face recognition and mask detection.</p>
                     </article>
                     <article class="post-item category-embedded" data-post-slug="pn532-nfc-tutorial">
                         <span class="post-category-tag tag-embedded">NFC</span>
                         <span class="post-date">2021-03</span>
-                        <h3><a href="pn532-nfc-tutorial.html">使用 PN532 将全加密卡复制到手环上 — NFC 校园门禁卡模拟教程</a></h3>
-                        <p>详细记录如何使用 PN532 模块和 UID 卡，将全加密校园门禁卡模拟到智能手环上，包含材料准备、破解步骤、模拟教程等完整指南。</p>
+                        <h3><a href="pn532-nfc-tutorial.html">使用 PN532 NFC Tutorial — NFC 校园门禁卡模拟教程</a></h3>
+                        <p>Detailed guide on using PN532 module and UID cards to simulate encrypted campus access cards on smart bracelets, including material preparation, cracking steps, and complete simulation tutorial.</p>
                     </article>
                 </div>
             </div>

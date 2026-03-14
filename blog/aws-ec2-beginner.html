@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS EC2 入门指南：如何在云端启动你的第一台服务器</title>
+    <title>AWS EC2 入门指南：如何在云端启动你的第一台服务器 | Junzhe Lin</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body data-page="blog-post" data-blog-slug="aws-ec2">
+<body data-page="blog">
     <nav class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">Junzhe Lin</a>
             <div class="nav-menu">
                 <ul class="nav-links">
                     <li><a href="../index.html">首页</a></li>
-                    <li><a href="aws-ec2-beginner.html" class="active">技术博客</a></li>
+                    <li><a href="index.html" class="active">技术博客</a></li>
                     <li><a href="../about.html">关于我</a></li>
                 </ul>
                 <div class="nav-controls">
@@ -28,9 +28,9 @@
                             </svg>
                         </button>
                         <div class="lang-dropdown">
-                            <button class="lang-option active" data-lang="zh">中文</button>
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="ja">日本語</button>
+                            <a href="aws-ec2-beginner.html" class="lang-option active">中文</a>
+                            <a href="aws-ec2-en.html" class="lang-option">English</a>
+                            <a href="aws-ec2-ja.html" class="lang-option">日本語</a>
                         </div>
                     </div>
                     <button class="theme-toggle" title="切换主题">🌙</button>
@@ -121,6 +121,10 @@ ssh -i your-key.pem ec2-user@your-instance-public-ip</code></pre>
             <h2>总结</h2>
             <p>EC2 是 AWS 云服务的基石，掌握 EC2 的使用方法对于云端开发至关重要。通过本文，你应该已经了解了 EC2 的核心概念，并成功启动了你的第一台云服务器。</p>
             <p>在后续的文章中，我们将深入探讨 EC2 的高级功能，如自动伸缩、负载均衡、高可用性架构等。</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="index.html" class="back-link">← 返回博客目录</a>
         </div>
     </article>
 

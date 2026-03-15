@@ -59,19 +59,21 @@ function enhanceCodeBlocks() {
         copyBtn.onclick = function() { copyCode(code, copyBtn); };
         actions.appendChild(copyBtn);
         
-        // Expand/Collapse button (only for long code)
+        // Expand/Collapse button (only for long code) - placed below code block
+        let expandBtn = null;
         if (code.textContent.split('\n').length > 15) {
-            const expandBtn = document.createElement('button');
+            expandBtn = document.createElement('button');
             expandBtn.className = 'expand-btn';
-            expandBtn.innerHTML = '▼ 收起';
-            expandBtn.onclick = function() { toggleExpand(wrapper, expandBtn); };
-            actions.appendChild(expandBtn);
             
             // Start collapsed for very long code
             if (code.textContent.split('\n').length > 30) {
                 wrapper.classList.add('collapsed');
                 expandBtn.innerHTML = '▶ 展开';
+            } else {
+                expandBtn.innerHTML = '▼ 收起';
             }
+            
+            expandBtn.onclick = function() { toggleExpand(wrapper, expandBtn); };
         }
         
         header.appendChild(actions);
@@ -80,6 +82,11 @@ function enhanceCodeBlocks() {
         pre.parentNode.insertBefore(wrapper, pre);
         wrapper.appendChild(header);
         wrapper.appendChild(pre);
+        
+        // Add expand button below code block
+        if (expandBtn) {
+            wrapper.appendChild(expandBtn);
+        }
         
         // Add line numbers
         addLineNumbers(code);

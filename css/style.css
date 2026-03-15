@@ -537,11 +537,12 @@ body {
 .blog-content pre {
     background: var(--code-bg);
     color: #f8f8f2;
-    padding: 24px;
+    padding: 16px;
     border-radius: 12px;
     overflow-x: auto;
     margin: 25px 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.2;
 }
 
 .blog-content pre code {
@@ -998,6 +999,7 @@ pre[class*="language-"] {
 .code-line {
     display: block;
     padding: 0 1em;
+    line-height: 1.2;
 }
 
 .code-line::before {

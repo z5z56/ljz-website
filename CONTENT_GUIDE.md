@@ -1,3 +1,14 @@
+---
+AIGC:
+    ContentProducer: Minimax Agent AI
+    ContentPropagator: Minimax Agent AI
+    Label: AIGC
+    ProduceID: "00000000000000000000000000000000"
+    PropagateID: "00000000000000000000000000000000"
+    ReservedCode1: 304502210096b1643d99956d6c6ea16139fe80e54a4d2e30480e2281e7fbd12c9e0bf5600402207ed68ab748b3b04b62a593bda8dd4b9fbb17735bb86c533a2d45205bebf0ec66
+    ReservedCode2: 30440220198ac308ba21f52c6ca111bcaf52d38c315bf30d194975f264f53a7bb17d047702207b379ffda6c63909819b8bc84361e99a893f60789178318ef3d578cae4238cbf
+---
+
 # 📝 网站内容管理指南
 
 本指南帮助你管理 ljz-website 个人技术博客网站的内容。

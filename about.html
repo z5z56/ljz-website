@@ -8,6 +8,121 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-layout {
+            display: flex;
+            gap: 40px;
+            padding: 40px 0;
+        }
+        .about-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+        .about-sidebar .profile-photo {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+        .about-sidebar .name-block {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .about-sidebar .name-ja {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .about-sidebar .name-zh {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+        .about-sidebar .name-en {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .about-sidebar .contact-block {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+        .about-sidebar .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+        .about-sidebar .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .about-sidebar .contact-item a:hover {
+            text-decoration: underline;
+        }
+        .about-main {
+            flex: 1;
+            min-width: 0;
+        }
+        .about-main .content-block {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .about-main .content-block h2 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--text-color);
+        }
+        .about-main .timeline-item {
+            margin-bottom: 16px;
+        }
+        .about-main .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .about-main .timeline-item h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .about-main .timeline-item .timeline-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .about-main .interests-list,
+        .about-main .skills-list,
+        .about-main .awards-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .about-main .interests-list li,
+        .about-main .skills-list li,
+        .about-main .awards-list li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+        .about-main .interests-list li:last-child,
+        .about-main .skills-list li:last-child,
+        .about-main .awards-list li:last-child {
+            margin-bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .about-layout {
+                flex-direction: column;
+            }
+            .about-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body data-page="about">
     <nav class="navbar">
@@ -16,7 +131,7 @@
             <div class="nav-menu">
                 <ul class="nav-links">
                     <li><a href="index.html">首页</a></li>
-                    <li><a href="blog/aws-ec2-beginner.html">技术博客</a></li>
+                    <li><a href="blog/index.html">技术博客</a></li>
                     <li><a href="about.html" class="active">关于我</a></li>
                 </ul>
                 <div class="nav-controls">
@@ -39,82 +154,78 @@
         </div>
     </nav>
 
-    <section class="about-hero">
-        <div class="profile-section">
-            <div class="avatar">👨‍🎓</div>
-            <h1>Junzhe Lin (林俊哲)</h1>
-            <p class="title">M.Sc. in Computer Science | Cloud Computing & Distributed Systems</p>
-        </div>
-    </section>
-
     <main class="container">
-        <section class="about-content">
-            <div class="content-block">
-                <h2>👨‍🎓 教育背景</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>理学硕士 - 计算机科学</h3>
-                        <p class="timeline-info">香港大学 (HKU) | 2023 - 2025</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>理学学士 - 计算机科学</h3>
-                        <p class="timeline-info">深圳大学 | 2019 - 2023</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-block">
-                <h2>🔬 研究方向</h2>
-                <ul class="interests-list">
-                    <li>云计算 (Cloud Computing)</li>
-                    <li>分布式系统 (Distributed Systems)</li>
-                    <li>机器学习 (Machine Learning)</li>
-                </ul>
-            </div>
-
-            <div class="content-block">
-                <h2>🛠️ 技术技能</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>编程</h3>
-                        <p>Python, Go, Java, SQL</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>云与 DevOps</h3>
-                        <p>AWS, Docker, Kubernetes</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>工具</h3>
-                        <p>Linux, Git</p>
+        <div class="about-layout">
+            <aside class="about-sidebar">
+                <img src="images/生活照.jpg" alt="Junzhe Lin" class="profile-photo">
+                <div class="name-block">
+                    <div class="name-ja">りん　しょんてつ</div>
+                    <div class="name-zh">林 俊哲</div>
+                    <div class="name-en">Lin Junzhe</div>
+                    <div class="contact-block">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <a href="mailto:linjunzhe21@gmail.com">linjunzhe21@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>💼</span>
+                            <a href="https://www.linkedin.com/in/junzhelin" target="_blank">www.linkedin.com/in/junzhelin</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </aside>
 
-            <div class="content-block">
-                <h2>📄 学术论文</h2>
-                <ul class="publications-list">
-                    <li><strong>"DAPRE: A Novel Data-Aware Peering Replication Scheme for Edge Storage"</strong> — IEEE Transactions on Cloud Computing (2024)</li>
-                    <li><strong>"Edge-Cache: A Distributed Edge Caching System for Edge Computing Environments"</strong> — IEEE ICWS (2024)</li>
-                </ul>
-            </div>
+            <div class="about-main">
+                <div class="content-block">
+                    <h2>👨‍🎓 教育背景</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>工学硕士 - 通信工程</h3>
+                            <p class="timeline-info">厦门大学 (XMU) | 2022 - 2025</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>工学学士 - 电子信息工程</h3>
+                            <p class="timeline-info">福建师范大学 | 2018 - 2022</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="content-block">
-                <h2>🏆 荣誉奖项</h2>
-                <ul class="awards-list">
-                    <li>国家奖学金 (前 2%, 2021)</li>
-                    <li>全国大学生数学建模竞赛一等奖 (2022)</li>
-                    <li>Dean's List (2019-2023)</li>
-                </ul>
-            </div>
+                <div class="content-block">
+                    <h2>🔬 研究方向</h2>
+                    <ul class="interests-list">
+                        <li>云计算 (Cloud Computing)</li>
+                        <li>分布式系统 (Distributed Systems)</li>
+                        <li>机器学习 (Machine Learning)</li>
+                    </ul>
+                </div>
 
-            <div class="content-block">
-                <h2>📧 联系方式</h2>
-                <div class="contact-info">
-                    <p><strong>邮箱:</strong> <a href="mailto:linjz@connect.hku.hk">linjz@connect.hku.hk</a></p>
-                    <p><strong>GitHub:</strong> <a href="https://github.com/junzhe-lin" target="_blank">github.com/junzhe-lin</a></p>
+                <div class="content-block">
+                    <h2>🛠️ 技术技能</h2>
+                    <ul class="skills-list">
+                        <li><strong>编程:</strong> Python, Go, Java, SQL</li>
+                        <li><strong>云与 DevOps:</strong> AWS, Docker, Kubernetes</li>
+                        <li><strong>工具:</strong> Linux, Git</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h2>📄 学术论文</h2>
+                    <ul class="interests-list">
+                        <li><strong>"DAPRE: A Novel Data-Aware Peering Replication Scheme for Edge Storage"</strong> — IEEE Transactions on Cloud Computing (2024)</li>
+                        <li><strong>"Edge-Cache: A Distributed Edge Caching System for Edge Computing Environments"</strong> — IEEE ICWS (2024)</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h2>🏆 荣誉奖项</h2>
+                    <ul class="awards-list">
+                        <li>国家奖学金 (前 2%, 2021)</li>
+                        <li>全国大学生数学建模竞赛一等奖 (2022)</li>
+                        <li>Dean's List (2019-2023)</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer class="footer">

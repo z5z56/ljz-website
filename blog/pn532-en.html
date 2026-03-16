@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copying Fully Encrypted Cards to Wristband with PN532 - NFC Campus Card Simulation Tutorial | Junzhe Lin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body data-page="blog-post" data-blog-slug="pn532-nfc-tutorial">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Blog</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>English</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="pn532-nfc-tutorial.html" class="lang-option">中文</a>
+                            <a href="pn532-en.html" class="lang-option active">English</a>
+                            <a href="pn532-ja.html" class="lang-option">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="Toggle Theme">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">Embedded Software</span>
+            <h1>Copying Fully Encrypted Cards to Wristband with PN532 - NFC Campus Card Simulation Tutorial</h1>
+            <div class="post-meta">
+                <span>📅 2021-03</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+                <p><strong>Warning!</strong></p>
+                <p>This tutorial only teaches simulation-related knowledge and how to use wristbands to simulate fully encrypted campus cards. It is for personal learning only. Do not modify data or amounts. Any illegal consequences resulting from this are the individual's responsibility.</p>
+                <p>This tutorial only covers sector 0 UID simulation teaching, not amount or other information modification.</p>
+            </blockquote>
+
+            <p>The idea of simulating encrypted cards has been around for a long time. However, the methods and steps on the internet are inconsistent. After reading a lot of information, I finally figured it out. Now I'm organizing and trying to write a tutorial.</p>
+
+            <h2>Materials Needed</h2>
+            <img src="images/pn532/pn532-materials.jpg" alt="PN532 Materials">
+            <p class="image-caption">PN532 module and required materials</p>
+
+            <p><strong>Hardware:</strong> PN532, USB to Serial, 4 Dupont wires, <strong>UID card</strong> (note this tutorial does not apply to CUID/UFUID cards!), The wristband you want to simulate (I used Honor Band 5) + phone with NFC</p>
+            <p><strong>Software:</strong> QQ Tool (蛐蛐), MifareOneTool, Drivers</p>
+
+            <h2>Simulation Principle</h2>
+            <img src="images/pn532/nfc-principle.png" alt="NFC Principle">
+            <p class="image-caption">NFC Technology Principle</p>
+
+            <ul>
+                <li>Wristbands cannot directly simulate encrypted cards because encrypted cards contain other information besides sector 0 (where UID is stored)</li>
+                <li>To make the wristband simulate, we need to create a blank UID card with only sector 0 (with the same UID as the original encrypted card)</li>
+                <li>We use UID cards because they can use backdoor special commands to modify the UID (card number)</li>
+                <li>To create this blank card, we first need to read sector 0 from the original encrypted card, which involves using the QQ tool for cracking (fully encrypted cards)</li>
+                <li>Using the phone to control the wristband to simulate the blank card is to write the original encrypted card information (except for block 0's 63 blocks) into the wristband</li>
+            </ul>
+            <p>Some terminology: S50 card = encrypted with SAK08 = common campus card = MIFARE Classic 1K</p>
+
+            <h2>Tutorial</h2>
+
+            <h3>Step 0: Environment Setup</h3>
+            <p>You need to connect USB to serial with PN532 using 4 Dupont wires:</p>
+            <ul>
+                <li>GND ---- GND</li>
+                <li>VCC ---- +5V/VCC</li>
+                <li>TXD ---- RXD</li>
+                <li>RXD ---- TXD</li>
+            </ul>
+            <p>If you haven't installed the driver before, you need to install the USB to serial driver (CH340 driver).</p>
+
+            <h3>Step 1: Crack Encrypted Card Information (Fully Encrypted Card)</h3>
+            <p>First, let's test if the environment is set up correctly and whether the card is fully encrypted.</p>
+            <p>Open MifareOneTool, click <strong>Detect Connection</strong>, and you should see the following information. Then place the campus card on PN532 and click <strong>Scan Card</strong>. This step helps us understand the card's information. If it's SAK08, it can most likely be copied.</p>
+            <p>Then click <strong>One-Click Decrypt Original Card</strong>. If it's a fully encrypted card, you will see the cracking interface.</p>
+            <p>Close MifareOneTool, open QQ Tool (蛐蛐), still place the original card on PN532, click in the upper right: <strong>Fully Encrypted Card Crack Key</strong>. Then it will start sniffing and cracking. Be patient, this process takes 30-60 minutes. When 3 or more identical keys appear on the right, it's likely correct.</p>
+            <p>Save the keys that appear on the right, then copy and paste them into the known keys. Then click <strong>Read with Key</strong>. Reading also takes about 30 minutes. After reading is complete, the original card information will be saved as <code>key.dump</code> in the same directory as QQ Tool. To prevent overwriting, I strongly recommend copying and saving it! We copied and named it <code>original_card.dump</code>.</p>
+
+            <h3>Step 2: Create Blank Card</h3>
+            <p>Close QQ Tool, open MifareOneTool again, click in order: <strong>Advanced Mode - Hex Editor - File - Open</strong>, and open the saved <code>original_card.dump</code>.</p>
+            <p>Switch between sectors to display information. Copy sector 0's block 0 information, then click <strong>File - New - First click sector 1 then click sector 0</strong> (this step initializes a new file) - Then paste the information into sector 0's block 0 of the new file - Click <strong>Modify Sector</strong> - Then <strong>Save As</strong> <code>blank_card.dump</code>. Note: Save As! It's a dump file!</p>
+            <p>Next, place the blank UID card on PN532, select <strong>Write UID Card</strong>, open the <code>blank_card.dump</code> file, and write it to the UID card to achieve writing the card number.</p>
+
+            <h3>Step 3: Simulate</h3>
+            <p>Connect the wristband to the phone, select the <strong>Simulate Card</strong> function, and simulate the UID card we just wrote (note: simulate, not create blank card!)</p>
+            <p>PS: Usually, the add blank card function is only available in Android phone apps. It's been removed from iPhone, so remember to use an Android phone. I used the Huawei Sports Health app.</p>
+            <p>Wait for a while, and when the simulation is successful, you're done.</p>
+
+            <h3>Step 4: Write Original Card Information, Activate Wristband</h3>
+            <p>In Step 3, we simulated sector 0 block 0, which means we've already written the UID. Now we need to write the other 63 blocks of information (encrypted data) so the wristband fully simulates the original card.</p>
+            <p>Open QQ Tool, place the UID card on PN532, click <strong>Read with Default Key</strong>. This step is to make the key (original card's key) in the key.dump file in the same directory as QQ Tool recognized and loaded by the software, so we know the key before writing the encrypted card data to the wristband.</p>
+            <p>Then remove the UID card, place the wristband, browse for file and select <code>original_card.dump</code>, click write. When you see success, it means writing is successful!</p>
+            <p>If there's other information, it means writing failed. Remember to try several more times, or delete the card from the phone and repeat the above steps.</p>
+            <p><strong>Now you can happily go swipe your wristband!</strong></p>
+
+            <h2>Other Ways to Simulate Campus Cards</h2>
+
+            <h3>1. STM32/Arduino + RC522</h3>
+            <p>This method requires building a project on STM32 and using RC522 library functions to send commands to 522 to achieve modifying white card UID. This method has high freedom and is suitable for understanding principles and advanced DIY players.</h3>
+
+            <h3>2. Xiaomi Phone Direct Simulation</h3>
+            <p>According to tests, Xiaomi phones with NFC under MIUI12 can directly simulate fully encrypted cards. If you want to put it on a wristband, follow the steps above.</p>
+
+            <h2>References</h2>
+            <ul>
+                <li><a href="https://www.bilibili.com/video/BV1PD4y1m78W" target="_blank">BiliBili Video Tutorial</a></li>
+                <li>Electronic Rabbit Taobao Store Materials</li>
+            </ul>
+        </div>
+
+        <div class="post-footer">
+            <a href="index.html" class="back-link">← Back to Blog</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/code-highlight.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

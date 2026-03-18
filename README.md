@@ -6,9 +6,9 @@ A personal website with technical blog and resume, deployed on GitHub Pages.
 
 ## Features
 
-- 📝 Technical Blog (AWS tutorials)
-- 👤 About Me page with education, skills, publications
-- ☁️ Cloud Computing focused content
+- 📝 Technical Blog 
+- 👤 About Me page 
+
 
 ## Tech Stack
 

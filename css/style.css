@@ -1251,7 +1251,7 @@ pre code {
 }
 
 /* ============================================
-   Visitor Globe Section
+   Visitor Map Section
    ============================================ */
 .visitor-globe {
     text-align: center;
@@ -1276,11 +1276,12 @@ pre code {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 220px;
+    min-height: 160px;
 }
 
-/* MapMyVisitors / Globe widget sizing */
+/* MapMyVisitors widget sizing */
 .globe-container canvas,
+.globe-container img,
 .globe-container iframe {
     max-width: 100% !important;
     display: block;

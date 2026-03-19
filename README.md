@@ -17,7 +17,7 @@ A personal website with technical blog and resume, deployed on GitHub Pages.
 
 ## Deployment
 
-This site is deployed at: https://z5z56.github.io/ljz-website/
+This site is deployed at: https://junzhelin.github.io/ljz-website/
 > https://ljz.ml (when configured)
 
 ## Files

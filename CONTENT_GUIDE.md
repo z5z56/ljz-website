@@ -18,12 +18,12 @@ AIGC:
 ## 📁 网站目录结构
 
 ```
-ljz-website/
+JunzheLin.github.io/
 ├── index.html          # 首页
 ├── about.html          # 关于我页面
 ├── blog/               # 博客文章目录
 │   ├── aws-ec2-beginner.html
-│   └── aws-s3-beginner.html
+│   └── ...
 ├── css/
 │   └── style.css       # 样式文件
 └── js/
@@ -95,17 +95,17 @@ const template = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${mdFile.replace('.md', '')}</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="blog">
     <nav class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <a href="/" class="logo">Junzhe Lin</a>
             <div class="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="/">首页</a></li>
                     <li><a href="#" class="active">技术博客</a></li>
-                    <li><a href="../about.html">关于我</a></li>
+                    <li><a href="/about.html">关于我</a></li>
                 </ul>
             </div>
         </div>
@@ -119,7 +119,7 @@ const template = `<!DOCTYPE html>
         <p>© 2026 Junzhe Lin. All rights reserved.</p>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>`;
 

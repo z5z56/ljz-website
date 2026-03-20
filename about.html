@@ -116,19 +116,32 @@
             font-size: 0.9rem;
         }
         .about-main .interests-list,
-        .about-main .skills-list {
+        .about-main .skills-list,
+        .about-main .funfacts-list {
             padding-left: 20px;
             margin: 0;
         }
         .about-main .interests-list li,
-        .about-main .skills-list li {
+        .about-main .skills-list li,
+        .about-main .funfacts-list li {
             margin-bottom: 8px;
             color: var(--text-light);
             line-height: 1.5;
         }
         .about-main .interests-list li:last-child,
-        .about-main .skills-list li:last-child {
+        .about-main .skills-list li:last-child,
+        .about-main .funfacts-list li:last-child {
             margin-bottom: 0;
+        }
+        .about-main .funfacts-list li {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .about-main .funfacts-list .fact-emoji {
+            font-size: 1.1rem;
+            line-height: 1;
+            flex-shrink: 0;
         }
         .about-main .skills-category {
             margin-bottom: 14px;
@@ -245,13 +258,13 @@
 
                 <div class="content-block">
                     <h2 data-i18n="funfacts.title">🎯 Fun Facts about Me</h2>
-                    <ul class="interests-list">
-                        <li data-i18n="funfacts.cooking">我喜欢做饭，我会做沙县小吃</li>
-                        <li data-i18n="funfacts.travel">我喜欢背包客旅行，曾连续旅游28天</li>
-                        <li data-i18n="funfacts.scholarship">我拿过国家奖学金</li>
-                        <li data-i18n="funfacts.fintech">我是金融科技爱好者，喜欢研究股票投资并捕捉科技动向</li>
-                        <li data-i18n="funfacts.waxberry">我小学的时候种了一棵杨梅树，现在每年都有杨梅吃</li>
-                        <li data-i18n="funfacts.hobbies">我的爱好还包括摄影、游泳、羽毛球、户外</li>
+                    <ul class="funfacts-list">
+                        <li><span class="fact-emoji">🍜</span><span data-i18n="funfacts.cooking">我喜欢做饭，我会做沙县小吃</span></li>
+                        <li><span class="fact-emoji">🎒</span><span data-i18n="funfacts.travel">我喜欢背包客旅行，曾连续旅游28天</span></li>
+                        <li><span class="fact-emoji">🏆</span><span data-i18n="funfacts.scholarship">我拿过国家奖学金</span></li>
+                        <li><span class="fact-emoji">📈</span><span data-i18n="funfacts.fintech">我是金融科技爱好者，喜欢研究股票投资并捕捉科技动向</span></li>
+                        <li><span class="fact-emoji">🌿</span><span data-i18n="funfacts.waxberry">我小学的时候种了一棵杨梅树，现在每年都有杨梅吃</span></li>
+                        <li><span class="fact-emoji">📷</span><span data-i18n="funfacts.hobbies">我的爱好还包括摄影、游泳、羽毛球、户外</span></li>
                     </ul>
                 </div>
             </div>

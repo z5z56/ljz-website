@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS EC2 Getting Started: Launch Your First Cloud Server | Junzhe Lin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-page="blog">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Blog</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>English</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="index.html" class="lang-option">中文</a>
+                            <a href="index-en.html" class="lang-option active">English</a>
+                            <a href="index-ja.html" class="lang-option">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="Toggle Theme">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">AWS</span>
+            <h1>AWS EC2 Getting Started: Launch Your First Cloud Server</h1>
+            <div class="post-meta">
+                <span>📅 2026-03-10</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <p>Amazon Elastic Compute Cloud (EC2) is one of AWS's core services, allowing users to quickly launch and manage virtual servers in the cloud. This article will take you through the core concepts of EC2 and help you deploy your first cloud server.</p>
+
+            <h2>What is EC2?</h2>
+            <p>EC2 is AWS's scalable computing service that provides various types of virtual servers (instances). Users can choose different compute, memory, and storage configurations based on their needs. Key features of EC2 include:</p>
+            <ul>
+                <li><strong>Elastic Scalability</strong>: Scale instance count up or down as needed</li>
+                <li><strong>Multiple Instance Types</strong>: General purpose, compute optimized, memory optimized, storage optimized, etc.</li>
+                <li><strong>Pay-as-you-go</strong>: Only pay for the compute resources you actually use</li>
+                <li><strong>Secure & Reliable</strong>: Network isolation via VPC and security groups</li>
+            </ul>
+
+            <h2>Core Concepts</h2>
+            
+            <h3>1. Instance Types</h3>
+            <p>AWS offers various instance types to meet different application scenarios:</p>
+            <ul>
+                <li><strong>General Purpose (t3, m5)</strong>: Suitable for web servers, development environments</li>
+                <li><strong>Compute Optimized (c5, c6i)</strong>: Suitable for high-performance computing, batch processing</li>
+                <li><strong>Memory Optimized (r5, x1e)</strong>: Suitable for large databases, in-memory caching</li>
+                <li><strong>Storage Optimized (i3, d2)</strong>: Suitable for data warehouses, file systems</li>
+            </ul>
+
+            <h3>2. Security Groups</h3>
+            <p>Security groups are virtual firewalls for EC2 that control inbound and outbound traffic:</p>
+            <ul>
+                <li>By default, all inbound traffic is denied</li>
+                <li>By default, all outbound traffic is allowed</li>
+                <li>You can configure rules to allow specific ports (e.g., 22 for SSH, 80 for HTTP)</li>
+            </ul>
+
+            <h3>3. Key Pairs</h3>
+            <p>SSH key pairs are used for secure login to EC2 instances. When creating an instance, you need to specify a key pair. The private key file (.pem) will be downloaded after creation - please keep it safe.</p>
+
+            <h2>Hands-on: Launch Your First EC2 Instance</h2>
+
+            <h3>Step 1: Login to AWS Console</h3>
+            <p>Visit aws.amazon.com, log in, and navigate to the EC2 console.</p>
+
+            <h3>Step 2: Launch Instance</h3>
+            <ol>
+                <li>Click the "Launch Instance" button</li>
+                <li>Name your instance (e.g., MyFirstServer)</li>
+                <li>Choose an OS image (Amazon Linux 2 or Ubuntu recommended)</li>
+                <li>Select instance type (t2.micro is good for learning, available in free tier)</li>
+                <li>Create or select a key pair</li>
+                <li>Configure security group: add SSH (22) and HTTP (80) rules</li>
+            </ol>
+
+            <h3>Step 3: Connect to Instance</h3>
+            <p>After the instance starts, you can connect using:</p>
+            <pre><code># Change key file permissions
+chmod 400 your-key.pem
+
+# Connect to instance
+ssh -i your-key.pem ec2-user@your-instance-public-ip</code></pre>
+
+            <h2>Best Practices</h2>
+            <blockquote>
+                <p>Security is paramount when using EC2. Here are some essential best practices:</p>
+            </blockquote>
+            <ul>
+                <li>Always use key pairs for login, avoid password authentication</li>
+                <li>Follow the principle of least privilege for security group rules</li>
+                <li>Regularly back up important data</li>
+                <li>Use IAM roles to manage instance permissions</li>
+                <li>Enable CloudWatch monitoring to detect anomalies early</li>
+            </ul>
+
+            <h2>Summary</h2>
+            <p>EC2 is the foundation of AWS cloud services. Mastering EC2 is essential for cloud development. Through this article, you should now understand the core concepts of EC2 and have successfully launched your first cloud server.</p>
+            <p>In follow-up articles, we'll explore advanced EC2 features such as auto-scaling, load balancing, and high-availability architectures.</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="index.html" class="back-link">← Back to Blog</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/code-highlight.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../blog/js/search.js"></script>
+</body>
+</html>

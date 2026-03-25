@@ -5,9 +5,9 @@
       "category": "cloud",
       "categoryIcon": "☁️",
       "files": {
-        "zh": "/blog/aws-ec2-beginner.html",
-        "en": "/blog/aws-ec2-en.html",
-        "ja": "/blog/aws-ec2-ja.html"
+        "zh": "/blog/aws-ec2/index.html",
+        "en": "/blog/aws-ec2/index-en.html",
+        "ja": "/blog/aws-ec2/index-ja.html"
       },
       "zh": {
         "title": "AWS EC2 入门指南：如何在云端启动你的第一台服务器",
@@ -48,9 +48,9 @@
       "category": "embedded",
       "categoryIcon": "🔧",
       "files": {
-        "zh": "/blog/openmv-electric-contest.html",
-        "en": "/blog/openmv-en.html",
-        "ja": "/blog/openmv-ja.html"
+        "zh": "/blog/openmv-vision/index.html",
+        "en": "/blog/openmv-vision/index-en.html",
+        "ja": "/blog/openmv-vision/index-ja.html"
       },
       "zh": {
         "title": "2020 电赛 F 题总结回顾 — OpenMV 实现视觉方案",
@@ -93,9 +93,9 @@
       "category": "embedded",
       "categoryIcon": "🔧",
       "files": {
-        "zh": "/blog/pn532-nfc-tutorial.html",
-        "en": "/blog/pn532-en.html",
-        "ja": "/blog/pn532-ja.html"
+        "zh": "/blog/pn532-nfc/index.html",
+        "en": "/blog/pn532-nfc/index-en.html",
+        "ja": "/blog/pn532-nfc/index-ja.html"
       },
       "zh": {
         "title": "使用 PN532 将全加密卡复制到手环上 — NFC 校园门禁卡模拟教程",

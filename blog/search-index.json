@@ -5,9 +5,9 @@
       "category": "cloud",
       "categoryIcon": "☁️",
       "files": {
-        "zh": "aws-ec2-beginner.html",
-        "en": "aws-ec2-en.html",
-        "ja": "aws-ec2-ja.html"
+        "zh": "/blog/aws-ec2-beginner.html",
+        "en": "/blog/aws-ec2-en.html",
+        "ja": "/blog/aws-ec2-ja.html"
       },
       "zh": {
         "title": "AWS EC2 入门指南：如何在云端启动你的第一台服务器",
@@ -30,16 +30,27 @@
         "tag": "AWS",
         "date": "2026-03-10"
       },
-      "keywords": ["AWS", "EC2", "云服务器", "云计算", "cloud", "server", "インスタンス", "サーバー", "安全组", "セキュリティグループ"]
+      "keywords": [
+        "AWS",
+        "EC2",
+        "云服务器",
+        "云计算",
+        "cloud",
+        "server",
+        "インスタンス",
+        "サーバー",
+        "安全组",
+        "セキュリティグループ"
+      ]
     },
     {
       "id": "openmv",
       "category": "embedded",
       "categoryIcon": "🔧",
       "files": {
-        "zh": "openmv-electric-contest.html",
-        "en": "openmv-en.html",
-        "ja": "openmv-ja.html"
+        "zh": "/blog/openmv-electric-contest.html",
+        "en": "/blog/openmv-en.html",
+        "ja": "/blog/openmv-ja.html"
       },
       "zh": {
         "title": "2020 电赛 F 题总结回顾 — OpenMV 实现视觉方案",
@@ -62,16 +73,29 @@
         "tag": "コンテスト",
         "date": "2020-09"
       },
-      "keywords": ["OpenMV", "电赛", "电子设计竞赛", "视觉", "人脸识别", "口罩检测", "嵌入式", "vision", "face recognition", "embedded", "電気競技", "顔認識"]
+      "keywords": [
+        "OpenMV",
+        "电赛",
+        "电子设计竞赛",
+        "视觉",
+        "人脸识别",
+        "口罩检测",
+        "嵌入式",
+        "vision",
+        "face recognition",
+        "embedded",
+        "電気競技",
+        "顔認識"
+      ]
     },
     {
       "id": "pn532",
       "category": "embedded",
       "categoryIcon": "🔧",
       "files": {
-        "zh": "pn532-nfc-tutorial.html",
-        "en": "pn532-en.html",
-        "ja": "pn532-ja.html"
+        "zh": "/blog/pn532-nfc-tutorial.html",
+        "en": "/blog/pn532-en.html",
+        "ja": "/blog/pn532-ja.html"
       },
       "zh": {
         "title": "使用 PN532 将全加密卡复制到手环上 — NFC 校园门禁卡模拟教程",
@@ -94,7 +118,20 @@
         "tag": "NFC",
         "date": "2021-03"
       },
-      "keywords": ["PN532", "NFC", "门禁", "卡复制", "UID", "ESP32", "Arduino", "access card", "RFID", "カード", "複製", "複製", "门禁卡"]
+      "keywords": [
+        "PN532",
+        "NFC",
+        "门禁",
+        "卡复制",
+        "UID",
+        "ESP32",
+        "Arduino",
+        "access card",
+        "RFID",
+        "カード",
+        "複製",
+        "门禁卡"
+      ]
     }
   ]
 }

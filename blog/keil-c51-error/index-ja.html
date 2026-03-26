@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keil C51 で一堆 error C141 が出るが他のコンパイラでは通るよくある原因 | Junzhe Lin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body data-page="blog-post" data-blog-slug="keil-c51-error">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li><a href="index.html" class="active">技術ブログ</a></li>
+                    <li><a href="../about.html">自分について</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>日本語</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="index.html" class="lang-option">中文</a>
+                            <a href="index-en.html" class="lang-option">English</a>
+                            <a href="index-ja.html" class="lang-option active">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="テーマ切り替え">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">Debug</span>
+            <h1>Keil C51 で一堆 error C141 が出るが、他のコンパイラでは通るよくある原因</h1>
+            <div class="post-meta">
+                <span>📅 2026-03</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <p>バブルソートを書いて、VC などのコンパイラでは問題なかったのに、Keil C51 では大量のエラーが出て困りました。</p>
+
+            <p>括弧の閉じ忘れなどの基本的な原因の他に、もう一つありえる原因是：</p>
+
+            <h2>== 変数名が C51 のキーワードと被っている ==</h2>
+
+            <p>例えば私が使った <code>data</code> は、C51 の予約キーワードです：</p>
+
+            <img src="images/01-data-keyword.svg" alt="Keil C51におけるdataキーワードの表示"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 画像：Keil C51におけるdataキーワード<br><small>（元画像はCSDNからの引用、手動で差し替えてください）</small></div>'">
+            <p class="image-caption">data は C51 の予約キーワード。太字でのハイライトが分かりにくく、見落としやすい</p>
+
+            <p>そこに <code>data</code> という名前の配列を定義してしまったため、以下のような大量のエラーが発生しました：</p>
+
+            <img src="images/02-error-output.svg" alt="Keil C51エラー出力のスクリーンショット"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 画像：Keil C51のエラー出力<br><small>（元画像はCSDNからの引用、手動で差し替えてください）</small></div>'">
+            <p class="image-caption">大量的 error C141: syntax error near '[' が表示され、構文エラーと誤認しやすい</p>
+
+            <h2>解決策</h2>
+            <p><strong>配列の名前を変更するだけ</strong>で直ります。</p>
+
+            <p>こうしてスクリーンショットを貼り付けたのは、百難の Keil のキーワードハイライトの分かりにくさを痛感したからです……最初は全然気づきませんでした。</p>
+
+            <p>この2時間を返我还QAQ という思いでこの記事を書きます。</p>
+
+            <hr>
+
+            <h2>付録：C51 キーワード一覧</h2>
+
+            <h3>メモリタイプ（記憶域型）</h3>
+
+            <img src="images/03-storage-types.svg" alt="C51メモリタイプ一覧表"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 画像：C51のメモリタイプ<br><small>（元画像はCSDNからの引用、手動で差し替えてください）</small></div>'">
+            <p class="image-caption">変数を宣言する際にメモリタイプは省略可能。C51 はコンパイルモードに応じてデフォルトのメモリタイプを適用する</p>
+
+            <h3>基本データ型</h3>
+
+            <img src="images/04-data-types.svg" alt="C51基本データ型一覧表"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 画像：C51の基本データ型<br><small>（元画像はCSDNからの引用、手動で差し替えてください）</small></div>'">
+            <p class="image-caption">C51がサポートする基本データ型の一覧</p>
+
+            <h3>記憶域クラス（ストレージクラス）</h3>
+            <p>C51 変数の記憶域クラスは4種類あります：</p>
+            <ul>
+                <li><strong>auto</strong>（自動）</li>
+                <li><strong>extern</strong>（外部）</li>
+                <li><strong>static</strong>（静的）</li>
+                <li><strong>register</strong>（レジスタ）</li>
+            </ul>
+
+            <h3>特殊機能レジスタ sfr</h3>
+            <p>8051 の特殊機能レジスタ（SFR）のアドレスを宣言するために使用します。</p>
+
+            <h3>ビット変数 bit</h3>
+            <p>0 または 1 の値のみ取れるビット変数を宣言するために使用します。</p>
+
+            <p>他のキーワードはまあまあ大丈夫だけど、この <code>data</code> は本当に他の言語で慣れているだけに厄介ですね……</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="../index.html" class="back-link">← ブログ目次に戻る</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/code-highlight.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

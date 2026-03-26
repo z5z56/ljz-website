@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Common Cause of Many error C141 in Keil C51 That Passes in Other Compilers | Junzhe Lin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body data-page="blog-post" data-blog-slug="keil-c51-error">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Blog</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>English</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="index.html" class="lang-option">中文</a>
+                            <a href="index-en.html" class="lang-option active">English</a>
+                            <a href="index-ja.html" class="lang-option">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="Toggle Theme">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">Debug</span>
+            <h1>A Common Cause of Many "error C141" in Keil C51 That Passes Fine in Other Compilers</h1>
+            <div class="post-meta">
+                <span>📅 2026-03</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <p>I wrote a bubble sort algorithm. It compiled fine in VC and other compilers, but went crazy with errors in Keil C51.</p>
+
+            <p>Besides basic issues like missing parentheses, one more likely cause is:</p>
+
+            <h2>== Variable Name Collides with a C51 Keyword ==</h2>
+
+            <p>For example, I used <code>data</code>, which is a C51 reserved keyword:</p>
+
+            <img src="images/01-data-keyword.svg" alt="data keyword highlighting in Keil C51"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 Image: data as C51 keyword<br><small>（Original image from CSDN, please replace manually）</small></div>'">
+            <p class="image-caption">data is a C51 reserved keyword — the highlighting is not obvious and easy to miss</p>
+
+            <p>And I defined an array named <code>data</code>, which caused a bunch of error messages like this:</p>
+
+            <img src="images/02-error-output.svg" alt="Keil C51 error output screenshot"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 Image: Keil C51 error output<br><small>（Original image from CSDN, please replace manually）</small></div>'">
+            <p class="image-caption">Lots of error C141: syntax error near '[', easily mistaken for syntax mistakes</p>
+
+            <h2>Solution</h2>
+            <p><strong>Simply rename the array to something else.</strong></p>
+
+            <p>I posted these screenshots just to show how unfairly subtle Keil's keyword highlighting is — that's why I didn't catch it at first…</p>
+
+            <p>This article is dedicated to the 2 hours I wasted on this QAQQAQ</p>
+
+            <hr>
+
+            <h2>Appendix: C51 Keyword Reference</h2>
+
+            <h3>Memory Types</h3>
+
+            <img src="images/03-storage-types.svg" alt="C51 memory types table"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 Image: C51 memory types<br><small>（Original image from CSDN, please replace manually）</small></div>'">
+            <p class="image-caption">Memory type can be omitted when declaring variables; C51 will use the default memory type based on the compilation model</p>
+
+            <h3>Base Data Types</h3>
+
+            <img src="images/04-data-types.svg" alt="C51 base data types table"
+                 onerror="this.outerHTML='<div style=&quot;border:2px dashed #9b59b6;background:#f5f0fa;padding:30px;text-align:center;color:#7d3c98;font-size:0.9rem;margin:20px 0;&quot;>📷 Image: C51 base data types<br><small>（Original image from CSDN, please replace manually）</small></div>'">
+            <p class="image-caption">Overview of C51 supported base data types</p>
+
+            <h3>Storage Classes</h3>
+            <p>C51 variables have four storage classes:</p>
+            <ul>
+                <li><strong>auto</strong></li>
+                <li><strong>extern</strong></li>
+                <li><strong>static</strong></li>
+                <li><strong>register</strong></li>
+            </ul>
+
+            <h3>Special Function Register — sfr</h3>
+            <p>Used to declare the address of a Special Function Register (SFR) on the 8051.</p>
+
+            <h3>Bit Variable — bit</h3>
+            <p>Used to declare a bit variable that can only be 0 or 1.</p>
+
+            <p>Most of the keywords are fine, but <code>data</code> is really easy to use out of habit from other languages…</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="../index.html" class="back-link">← Back to Blog</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/code-highlight.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

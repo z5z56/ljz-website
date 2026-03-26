@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[WinError 10061] 「ターゲットコンピュータにより接続が拒否されました」の解決方法 | Junzhe Lin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body data-page="blog-post" data-blog-slug="winerror-10061-pip">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li><a href="index.html" class="active">技術ブログ</a></li>
+                    <li><a href="../about.html">自分について</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>日本語</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="index.html" class="lang-option">中文</a>
+                            <a href="index-en.html" class="lang-option">English</a>
+                            <a href="index-ja.html" class="lang-option active">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="テーマ切り替え">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">Debug</span>
+            <h1>[WinError 10061] 「ターゲットコンピュータにより接続が拒否されました」の解決方法</h1>
+            <div class="post-meta">
+                <span>📅 2026-03</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <h2>問題の説明</h2>
+            <p>コマンドプロンプト（cmd）で pip を使って Python 環境にライブラリをインストールしようとしたところ、以下のエラーが発生しました：</p>
+            <p><code>Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))'</code></p>
+            <img src="images/01-error-screenshot.png" alt="WinError 10061 エラー画面のスクリーンショット">
+            <p class="image-caption">pip インストール時に WinError 10061「接続が拒否されました」のエラーが発生</p>
+
+            <h2>解決策</h2>
+            <p>ネットワークの問題です。的原因是之前使用的软件默认打开了电脑的代理设置（プロキシ設定）。</p>
+            <p>タスクバーで「プロキシ」を検索し、設定を開いてプロキシをオフにすれば解決します。</p>
+            <img src="images/02-proxy-settings.png" alt="プロキシ設定をオフにする画面">
+            <p class="image-caption">Windows設定でプロキシをオフにする</p>
+            <p>プロキシをオフにすると、正常にダウンロードできるようになります：</p>
+            <img src="images/03-success-screenshot.png" alt="プロキシ解除後の正常ダウンロード画面">
+            <p class="image-caption">プロキシを解除すると pip が正常にパッケージをダウンロードできるようになる</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="../index.html" class="back-link">← ブログ目次に戻る</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/code-highlight.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

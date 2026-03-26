@@ -353,7 +353,7 @@
                     <a href="#debug" class="category-nav-item" data-cat="debug">
                         <span class="cat-icon">🐛</span>
                         <span data-i18n="cat.debug">Debug</span>
-                        <span class="cat-count" id="count-debug">1</span>
+                        <span class="cat-count" id="count-debug">2</span>
                     </a>
                     <a href="#linux" class="category-nav-item" data-cat="linux">
                         <span class="cat-icon">🐧</span>
@@ -432,9 +432,17 @@
                     <div class="category-header">
                         <span class="cat-icon">🐛</span>
                         <span class="cat-name" data-i18n="cat.debug">Debug</span>
-                        <span class="cat-count-badge" id="badge-debug">1</span>
+                        <span class="cat-count-badge" id="badge-debug">2</span>
                     </div>
                     <div class="post-list">
+                        <article class="post-card">
+                            <div class="post-card-meta">
+                                <span class="post-card-tag" data-post-tag="winerr">Windows</span>
+                                <span class="post-card-date" data-i18n="posts.winerr.date">2026-03</span>
+                            </div>
+                            <h3><a href="winerror-10061-pip/index.html" data-post="winerr" data-i18n="posts.winerr.title">[WinError 10061] 由于目标计算机积极拒绝，无法连接。') 问题解决</a></h3>
+                            <p class="post-card-desc" data-i18n="posts.winerr.desc">在 cmd 使用 pip 安装 Python 库时遇到 WinError 10061 报错，原因是系统代理被软件自动开启。关闭代理设置后问题解决。</p>
+                        </article>
                         <article class="post-card">
                             <div class="post-card-meta">
                                 <span class="post-card-tag" data-post-tag="keil">Keil</span>
@@ -518,6 +526,13 @@
                 other:     "其他"
             },
             posts: {
+                winerr: {
+                    tag:   "Windows",
+                    date:  "2026-03",
+                    title: "[WinError 10061] 由于目标计算机积极拒绝，无法连接。') 问题解决",
+                    desc:  "在 cmd 使用 pip 安装 Python 库时遇到 WinError 10061 报错，原因是系统代理被软件自动开启。关闭代理设置后问题解决。",
+                    link:  "winerror-10061-pip/index.html"
+                },
                 keil: {
                     tag:   "Keil",
                     date:  "2026-03",
@@ -571,6 +586,13 @@
                 other:     "Other"
             },
             posts: {
+                winerr: {
+                    tag:   "Windows",
+                    date:  "2026-03",
+                    title: "[WinError 10061] 'Connection Refused' When Using pip — Solution",
+                    desc:  "Running pip install in cmd hit WinError 10061 because a software auto-enabled the system proxy. Turning off the proxy in settings fixed it immediately.",
+                    link:  "winerror-10061-pip/index-en.html"
+                },
                 keil: {
                     tag:   "Keil",
                     date:  "2026-03",
@@ -617,6 +639,13 @@
                 other:     "その他"
             },
             posts: {
+                winerr: {
+                    tag:   "Windows",
+                    date:  "2026-03",
+                    title: "[WinError 10061] 「ターゲットコンピュータにより接続が拒否されました」の解決方法",
+                    desc:  "コマンドプロンプトでpipインストール時にWinError 10061が出たのは、软件がプロキシ設定を自动有効にしたため。Windows設定でプロキシをオフにすれば解決。",
+                    link:  "winerror-10061-pip/index-ja.html"
+                },
                 keil: {
                     tag:   "Keil",
                     date:  "2026-03",

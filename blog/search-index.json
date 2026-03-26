@@ -1,6 +1,51 @@
 {
   "posts": [
     {
+      "id": "winerror-10061-pip",
+      "category": "debug",
+      "categoryIcon": "🐛",
+      "files": {
+        "zh": "/blog/winerror-10061-pip/index.html",
+        "en": "/blog/winerror-10061-pip/index-en.html",
+        "ja": "/blog/winerror-10061-pip/index-ja.html"
+      },
+      "zh": {
+        "title": "[WinError 10061] 由于目标计算机积极拒绝，无法连接。') 问题解决",
+        "desc": "在 cmd 使用 pip 安装 Python 库时遇到 WinError 10061 报错，原因是系统代理被软件自动开启。关闭代理设置后问题解决。",
+        "categoryName": "Debug",
+        "tag": "Windows",
+        "date": "2026-03"
+      },
+      "en": {
+        "title": "[WinError 10061] 'Connection Refused' When Using pip — Solution",
+        "desc": "Running pip install in cmd hit WinError 10061 because a software auto-enabled the system proxy. Turning off the proxy in settings fixed it immediately.",
+        "categoryName": "Debug",
+        "tag": "Windows",
+        "date": "2026-03"
+      },
+      "ja": {
+        "title": "[WinError 10061] 「ターゲットコンピュータにより接続が拒否されました」の解決方法",
+        "desc": "コマンドプロンプトでpipインストール時にWinError 10061が出たのは，软件がプロキシ設定を自动有効にしたため。Windows設定でプロキシをオフにすれば解決。",
+        "categoryName": "Debug",
+        "tag": "Windows",
+        "date": "2026-03"
+      },
+      "keywords": [
+        "WinError",
+        "10061",
+        "pip",
+        "Python",
+        "代理",
+        "proxy",
+        "连接被拒绝",
+        "connection refused",
+        "Windows",
+        "エラー",
+        "プロキシ",
+        "接続拒否"
+      ]
+    },
+    {
       "id": "keil-c51-error",
       "category": "debug",
       "categoryIcon": "🐛",

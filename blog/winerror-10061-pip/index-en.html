@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[WinError 10061] "Connection Refused" When Using pip — Solution | Junzhe Lin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .post-content .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body data-page="blog-post" data-blog-slug="winerror-10061-pip">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Junzhe Lin</a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Blog</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switch">
+                        <button class="lang-btn">
+                            <span>English</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="lang-dropdown">
+                            <a href="index.html" class="lang-option">中文</a>
+                            <a href="index-en.html" class="lang-option active">English</a>
+                            <a href="index-ja.html" class="lang-option">日本語</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" title="Toggle Theme">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header>
+            <span class="post-category">Debug</span>
+            <h1>[WinError 10061] "Connection Refused" When Using pip — Solution</h1>
+            <div class="post-meta">
+                <span>📅 2026-03</span>
+                <span>👤 Junzhe Lin</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <h2>Problem Description</h2>
+            <p>When using pip to install a Python library in cmd, the following error appeared:</p>
+            <p><code>Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it.'))'</code></p>
+            <img src="images/01-error-screenshot.png" alt="WinError 10061 error screenshot">
+            <p class="image-caption">WinError 10061 "connection refused" when running pip install</p>
+
+            <h2>Solution</h2>
+            <p>This is a network issue — in my case, a software had automatically enabled the system proxy settings.</p>
+            <p>Search for "proxy" in the taskbar, open the settings, and turn off the proxy.</p>
+            <img src="images/02-proxy-settings.png" alt="Disable proxy settings screenshot">
+            <p class="image-caption">Turn off the proxy in Windows system settings</p>
+            <p>After that, pip will work normally and download packages successfully:</p>
+            <img src="images/03-success-screenshot.png" alt="Successful pip download after disabling proxy">
+            <p class="image-caption">pip successfully downloads packages after disabling proxy</p>
+        </div>
+
+        <div class="post-footer">
+            <a href="../index.html" class="back-link">← Back to Blog</a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <p>© 2026 Junzhe Lin. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/code-highlight.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>
